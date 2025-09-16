@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+coverage/
+
+# Sass
+.sass-cache/
+*.map
+
+# Env/Secrets
+.env
+.env.*
+
+# Editor
+.vscode/
