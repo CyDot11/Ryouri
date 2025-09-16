@@ -1,0 +1,17 @@
+@use "menu-mixins" as *;
+
+.menu-h {
+  * {
+    white-space: nowrap;
+    margin: 0;
+  }
+  @include menu-horizontal();
+}
+
+.menu-v {
+  * {
+    white-space: nowrap;
+    margin: 0;
+  }
+  @include menu-vertical();
+}

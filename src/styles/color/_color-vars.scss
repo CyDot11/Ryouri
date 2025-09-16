@@ -1,0 +1,56 @@
+/*
+color-vars.scss
+project: AS-Paarberatung - https://www.as-paarberatung.de
+Designer: © Michael Schwarz, CyDot, info@cydot.de
+Version:  1.1.0
+Updated: 2025-01-13
+*/
+
+@use "sass:color";
+
+$color-a-xbright: #fdf9f2;
+$color-a-bright: #f3e8d9;
+$color-a-medium: #a89e8f;
+$color-a-dark: #797676;
+$color-a-xdark: #504a40;
+
+$color-b-bright: #658696;
+$color-b-medium: #465d74;
+$color-b-dark: #404d6d;
+
+$color-c-bright: #a18893;
+$color-c-medium: #ee6600;
+$color-c-dark: #882222;
+
+// -------------------------------------------
+
+$logo-color: $color-b-bright;
+
+// Link colors -------------------------------
+
+$link-color: $color-c-bright;
+$link-selected-color: $color-c-medium;
+$link-hover-color: $color-c-dark;
+$link-active-color: red;
+
+// Button colors -----------------------------
+
+$button-fond-color: color.change($color-a-bright, $alpha: 0);
+$button-figure-color: $color-a-dark;
+
+$button-fond-hover-color: $color-a-dark;
+$button-figure-hover-color: $color-a-bright;
+
+$button-figure-selected-color: $color-a-bright;
+$button-figure-active-color: $color-a-dark;
+
+// Text colors -------------------------------
+
+$headline-bright-color: $color-a-xbright;
+$text-bright-color: $color-a-xbright;
+
+$headline-a-color: $color-a-dark;
+$text-a-color: $color-a-dark;
+
+$headline-b-color: $color-b-dark;
+$text-b-color: $color-b-bright;

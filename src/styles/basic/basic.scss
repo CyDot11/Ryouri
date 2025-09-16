@@ -1,0 +1,78 @@
+@use "basic-mixins" as *;
+@use "../typo/typo";
+@use "../typo/icon-text-unit";
+@use "../layout/main-content";
+@use "../columns/columns";
+@use "../grid/grid";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+section,
+header,
+footer,
+div,
+img,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+blockquote {
+  position: relative;
+}
+
+section[role="main"],
+header[role="main"],
+footer[role="main"],
+.main-section {
+  width: 100%;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative;
+}
+
+.user-protect {
+  @include user-protect();
+}
+
+.no-select {
+  @include user-protect(true, false);
+}
+
+.no-drag {
+  @include user-protect(false, true);
+}
+
+button,
+[role="button"] {
+  @include user-protect();
+  &:hover,
+  &.vhover {
+    cursor: pointer;
+  }
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.shadow {
+  @include shadow();
+}

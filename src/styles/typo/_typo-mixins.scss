@@ -1,0 +1,168 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@use "typo-vars" as *;
+@use "../basic/basic-mixins" as *;
+@use "../breakpoints/breakpoint-vars" as *;
+@use "../breakpoints/responsive-functions" as *;
+
+$font-maps: (
+  "text": (
+    "mode": $responsive-text,
+    "size": $text-sizes,
+    "factor": $responsive-text-factors,
+    "device-factor": $responsive-text-factors--device,
+    "space-line-height": calc($text-line-height * $text-space-line-factor),
+  ),
+  "headline": (
+    "mode": $responsive-headline,
+    "size": $headline-sizes,
+    "factor": $responsive-headline-factors,
+    "device-factor": $responsive-headline-factors--device,
+    "space-line-height": calc(
+        $headline-line-height * $headline-space-line-factor
+      ),
+  ),
+  "display": (
+    "mode": $responsive-display,
+    "size": $display-sizes,
+    "factor": $responsive-display-factors,
+    "device-factor": $responsive-display-factors--device,
+    "space-line-height": calc($display-line-height * $display-space-line-factor),
+  ),
+);
+
+@mixin font-sizes($type: null) {
+  @if $type and map.has-key($font-maps, $type) {
+    @include font-type-sizes($type);
+  } @else {
+    @each $font-type, $map in $font-maps {
+      @include font-type-sizes($font-type);
+    }
+  }
+}
+
+@mixin font-type-sizes($type) {
+  $map: map.get($font-maps, $type);
+  $responsive: map.get($map, "mode");
+
+  @if $responsive {
+    @if $use-device-query {
+      @include responsive-font-type-sizes--device($type);
+    } @else {
+      @include responsive-font-type-sizes--bp($type);
+    }
+  } @else {
+    @include basic-font-type-sizes($type);
+  }
+}
+
+@mixin basic-font-type-sizes($type) {
+  $map: map.get($font-maps, $type);
+  $sizes: map.get($map, "size");
+  $space-line-height: map.get($map, "space-line-height");
+
+  @each $key, $value in $sizes {
+    $selector: map.get($font-selectors, $key);
+
+    #{$selector} {
+      font-size: $value;
+      margin-bottom: $value * $space-line-height;
+    }
+  }
+}
+
+@mixin responsive-font-type-sizes--bp($type) {
+  $map: map.get($font-maps, $type);
+  $size-map: map.get($map, "size");
+  $factor-map: map.get($map, "factor");
+  $space-line-height: map.get($map, "space-line-height");
+
+  @each $bp-key, $bp-value in $breakpoints-min {
+    @media (min-width: $bp-value) {
+      @each $el-key, $el-value in $size-map {
+        $resp-factor: map.get($factor-map, $bp-key);
+        $el-selector: map.get($font-selectors, $el-key);
+        $resp-size: multiplyPxPerfect($el-value, $resp-factor);
+
+        #{$el-selector} {
+          font-size: $resp-size;
+          margin-bottom: ($resp-size * $space-line-height);
+        }
+      }
+    }
+  }
+}
+
+@mixin responsive-font-type-sizes--device($type) {
+  $map: map.get($font-maps, $type);
+  $size-map: map.get($map, "size");
+  $factor-map: map.get($map, "device-factor");
+  $space-line-height: map.get($map, "space-line-height");
+
+  @each $device-key, $device-value in $factor-map {
+    #{$device-super-prefix + $device-key} {
+      $resp-factor: map.get($factor-map, $device-key);
+
+      @each $el-key, $el-value in $size-map {
+        $el-selector: map.get($font-selectors, $el-key);
+        $resp-size: multiplyPxPerfect($el-value, $resp-factor);
+
+        #{$el-selector} {
+          font-size: $resp-size;
+          margin-bottom: ($resp-size * $space-line-height);
+        }
+      }
+    }
+  }
+}
+
+@mixin text-style() {
+  font-family: $text-family;
+  font-weight: $text-weight;
+  letter-spacing: $text-letter-spacing;
+  word-spacing: $text-word-spacing;
+  line-height: $text-line-height;
+  text-align: $text-align;
+  text-transform: $text-transform;
+}
+
+@mixin headline-style() {
+  font-family: $headline-family;
+  font-weight: $headline-weight;
+  letter-spacing: $headline-letter-spacing;
+  word-spacing: $headline-word-spacing;
+  line-height: $headline-line-height;
+  text-align: $headline-align;
+  text-transform: $headline-transform;
+  @include user-protect(true, false);
+}
+
+@mixin display-style() {
+  font-family: $display-family;
+  font-weight: $display-weight;
+  letter-spacing: $display-letter-spacing;
+  word-spacing: $display-word-spacing;
+  line-height: $display-line-height;
+  text-align: $display-align;
+  text-transform: $display-transform;
+  @include user-protect(true, false);
+}
+
+@mixin link-style() {
+  font-family: $headline-family;
+  font-weight: $headline-weight;
+  letter-spacing: $headline-letter-spacing;
+  word-spacing: $headline-word-spacing;
+  line-height: $text-line-height;
+  text-align: $text-align;
+}
+
+@mixin font-spacer() {
+  &::after {
+    content: "SPACE";
+    display: block;
+    color: transparent;
+    opacity: 0;
+  }
+}

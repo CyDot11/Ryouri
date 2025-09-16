@@ -1,0 +1,30 @@
+$overlay-easing: ease-out !default;
+$overlay-duration: 0.24s !default;
+$overlay-delay: 0 !default;
+
+$overlay-opacity: 0.72 !default;
+$overlay-bg-color: #222 !default;
+$overlay-z: 90 !default;
+
+.overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: $overlay-z;
+
+  background-color: $overlay-bg-color;
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-timing-function: $overlay-easing;
+  transition-duration: $overlay-duration;
+  transition-delay: $overlay-delay;
+
+  &.active {
+    opacity: $overlay-opacity;
+  }
+}

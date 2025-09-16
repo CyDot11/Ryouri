@@ -1,0 +1,62 @@
+@use "sass:math";
+@use "sass:map";
+@use "../../../styles/breakpoints/breakpoint-vars" as *;
+
+$bullets-indicator-diameter: 12px;
+$bullets-indicator-gap: 16px;
+
+$pipes-indicator-width: 24px;
+$pipes-indicator-min-height: 6px;
+$pipes-indicator-max-height: 12px;
+$pipes-indicator-gap: 12px;
+
+$responsive-indicator-factor: (
+  "x0": 0.8,
+  "xs": 0.9,
+  "sm": 1,
+  "md": 1,
+  "lg": 1.1,
+  "xl": 1.2,
+);
+
+$responsive-indicator-factor--device: (
+  "ph": 0.85,
+  "ta": 1,
+  "de": 1.1,
+  "dx": 1.2,
+);
+
+// $type values: "bullets", "pipes"
+@mixin responsive-indicator-sizes--bp($type: "bullets") {
+  @each $bp-key, $bp-value in $breakpoints-min {
+    @media (min-width: $bp-value) {
+      $resp-factor: map.get($responsive-indicator-factor, $bp-key);
+      $pipes-max-height: math.round($pipes-indicator-max-height * $resp-factor);
+      $bullets-diameter: math.round($bullets-indicator-diameter * $resp-factor);
+
+      @if $type == "bullets" {
+        &.indicators.bullets {
+          gap: math.round($bullets-indicator-gap * $resp-factor);
+          .indicator {
+            width: $bullets-diameter;
+            height: $bullets-diameter;
+          }
+        }
+      } @else if $type == "pipes" {
+        &.indicators.pipes {
+          gap: math.round($pipes-indicator-gap * $resp-factor);
+          height: $pipes-max-height;
+
+          .indicator {
+            width: math.round($pipes-indicator-width * $resp-factor);
+            height: math.round($pipes-indicator-min-height * $resp-factor);
+
+            &.selected {
+              height: $pipes-max-height;
+            }
+          }
+        }
+      }
+    }
+  }
+}

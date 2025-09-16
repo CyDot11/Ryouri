@@ -1,0 +1,47 @@
+@use "sass:color";
+@use "../../styles/color/color-vars" as *;
+@use "../slide-box/slide-box-mixins" as *;
+@use "../menu/menu-mixins" as *;
+
+#Responsive-Info {
+  max-width: 100%;
+  min-height: 2rem;
+  padding: 1rem;
+  z-index: 1000;
+  background-color: color.change($color-b-bright, $alpha: 0.8);
+  box-shadow: 4px 6px 3px 0px rgba(0, 0, 0, 0.25);
+  @include slide-box("top", 0);
+  @include menu-vertical();
+}
+
+#RI-Content {
+  display: block;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.025rem;
+  line-height: 1.4;
+  color: var(--B-MEDIUM);
+}
+
+#RI-Info-Button {
+  display: block;
+  width: 3rem;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#RI-Close-Button {
+  display: block;
+  width: 3rem;
+  &:hover {
+    cursor: pointer;
+  }
+
+  .icon-figure {
+    fill: var(--B-MEDIUM);
+  }
+}

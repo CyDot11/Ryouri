@@ -1,0 +1,27 @@
+@use "breakpoints/breakpoint-vars" as *;
+@use "color/color-vars" as *;
+
+:root {
+  --GOLDEN-RATIO: #{1.631};
+
+  --X0: #{$x0};
+  --XS: #{$xs};
+  --SM: #{$sm};
+  --MD: #{$md};
+  --LG: #{$lg};
+  --XL: #{$xl};
+
+  --A-XBRIGHT: #{$color-a-xbright};
+  --A-BRIGHT: #{$color-a-bright};
+  --A-MEDIUM: #{$color-a-medium};
+  --A-DARK: #{$color-a-dark};
+  --A-XDARK: #{$color-a-xdark};
+
+  --B-BRIGHT: #{$color-b-bright};
+  --B-MEDIUM: #{$color-b-medium};
+  --B-DARK: #{$color-b-dark};
+
+  --C-BRIGHT: #{$color-c-bright};
+  --C-MEDIUM: #{$color-c-medium};
+  --C-DARK: #{$color-c-dark};
+}

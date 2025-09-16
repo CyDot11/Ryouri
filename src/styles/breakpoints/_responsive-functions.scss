@@ -1,0 +1,105 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:string";
+@use "breakpoint-vars" as *;
+
+@function removeUnit($value) {
+  $unit: math.unit($value);
+
+  @if $unit == "" {
+    @return $value;
+  }
+  @if $unit == "px" {
+    @return calc($value / 1px);
+  }
+  @if $unit == "em" {
+    @return calc($value / 1em);
+  }
+  @if $unit == "rem" {
+    @return calc($value / 1rem);
+  } @else {
+    @error "Unsupported unit: #{$unit}. Supported units are px, em, rem, or no unit.";
+  }
+}
+
+@function toRem($value, $round: true) {
+  $unit: math.unit($value);
+  $value: removeUnit($value);
+
+  @if $unit == "px" or $unit == "" {
+    @if $round {
+      @return calc(math.round($value) / 16) * 1rem;
+    }
+    @return calc($value / 16) * 1rem;
+  } @else if $round {
+    @return calc(math.round($value * 16) / 16) * 1rem;
+  }
+  @return $value * 1rem;
+}
+
+@function toEm($value, $round: true) {
+  $value: toRem($value, $round);
+  @return removeUnit($value) * 1em;
+}
+
+@function toPx($value, $round: true) {
+  $unit: math.unit($value);
+  $value: removeUnit($value);
+
+  @if $unit == "em" or $unit == "rem" {
+    @if $round {
+      @return math.round($value * 16px);
+    }
+    @return $value * 16px;
+  } @else if $round {
+    @return math.round($value * 1px);
+  }
+  @return $value * 1px;
+}
+
+@function multiplyPxPerfect($value, $factor: 1) {
+  $unit: math.unit($value);
+  $value: $value * $factor;
+
+  @if $unit == "" {
+    @return math.round($value);
+  }
+  @if $unit == "px" {
+    $value: removeUnit($value);
+    @return math.round($value) * 1px;
+  } @else if $unit == "rem" {
+    @return toRem($value);
+  } @else if $unit == "em" {
+    @return toEm($value);
+  } @else {
+    @return $value;
+  }
+}
+
+@function responsive-factor($breakpoint: "md", $curve: "medium") {
+  $map: map.get($breakpoint-factors, $curve);
+  @return map.get($map, $breakpoint);
+}
+
+@function responsive-value($value, $breakpoint: "md", $curve: "medium") {
+  $factor: responsive-factor($breakpoint, $curve);
+  @return multiplyPxPerfect($value, $factor);
+}
+
+@function responsive-value--px($value, $breakpoint: "md", $curve: "medium") {
+  $factor: responsive-factor($breakpoint, $curve);
+  $value: toPx($value, false);
+  @return math.round($value * $factor);
+}
+
+@function responsive-value--rem($value, $breakpoint: "md", $curve: "medium") {
+  $factor: responsive-factor($breakpoint, $curve);
+  $value: toRem($value, false);
+  @return multiplyPxPerfect($value, $factor);
+}
+
+@function responsive-value--em($value, $breakpoint: "md", $curve: "medium") {
+  $factor: responsive-factor($breakpoint, $curve);
+  $value: toEm($value, false);
+  @return multiplyPxPerfect($value, $factor);
+}

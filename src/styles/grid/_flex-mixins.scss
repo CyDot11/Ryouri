@@ -1,0 +1,104 @@
+/*
+Flexgrid Mixins
+2021 Michael Schwarz - cydot.de / grafic, web, media
+Last update 2021.12.08
+*/
+
+@use "grid-vars" as *;
+@use "../breakpoints/breakpoint-vars" as *;
+
+// Horizontal --------------------------------
+
+@mixin flex-left() {
+  justify-content: flex-start;
+}
+
+@mixin flex-center() {
+  justify-content: center;
+}
+
+@mixin flex-right() {
+  justify-content: flex-end;
+}
+
+// Vertical ---------------------------------
+
+@mixin flex-top() {
+  align-items: flex-start;
+}
+
+@mixin flex-middle() {
+  align-items: center;
+}
+
+@mixin flex-bottom() {
+  align-items: flex-end;
+}
+
+// Spacing ---------------------------------
+
+@mixin flex-between() {
+  justify-content: space-between;
+}
+
+@mixin flex-around() {
+  justify-content: space-around;
+}
+
+@mixin flex-stretch() {
+  align-content: stretch;
+}
+
+@mixin flex-item-sizing($basis: auto, $grow: 0, $shrink: 0) {
+  flex-basis: $basis;
+  flex-grow: $grow;
+  flex-shrink: $shrink;
+}
+
+// Flexbox ----------------------------------
+
+@mixin flexbox-defaults() {
+  flex-direction: row;
+  flex-wrap: wrap;
+  @include flex-top;
+  @include flex-left;
+}
+
+@mixin flexbox() {
+  box-sizing: border-box;
+  display: flex;
+  @include flexbox-defaults;
+}
+
+@mixin flexbox-inline() {
+  display: inline-flex;
+  box-sizing: border-box;
+  @include flexbox-defaults;
+}
+
+@mixin classify-flex-grid() {
+  .grid {
+    @include flexbox();
+    gap: $grid-gap;
+    border-color: green !important;
+
+    > * {
+      flex-basis: 100%;
+      max-width: 100%;
+    }
+
+    @each $bp-id, $bp-value in $breakpoints-min {
+      @media (min-width: $bp-value) {
+        @for $i from 2 through $grid-max-cols {
+          $selector: "." + $bp-id + "-cols-" + $i;
+          &#{$selector} > * {
+            box-sizing: border-box;
+            $width: calc((100% / $i) - $grid-gap * ($i - 1) / $i);
+            flex-basis: $width;
+            max-width: $width;
+          }
+        }
+      }
+    }
+  }
+}

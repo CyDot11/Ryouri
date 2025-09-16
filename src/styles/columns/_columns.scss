@@ -1,0 +1,21 @@
+@use "columns-vars" as *;
+@use "columns-mixins" as *;
+
+$classifyResponsiveColumns: true;
+$clipResponsiveColumns: false;
+
+.columns {
+  column-count: $max-column-count;
+  column-width: $min-column-width;
+  column-gap: $column-gap;
+  column-fill: $column-fill;
+
+  @if $classifyResponsiveColumns {
+    @include classifyResponsiveColumns(5, $clipResponsiveColumns);
+  }
+
+  .no-break-inside {
+    column-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

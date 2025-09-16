@@ -1,0 +1,118 @@
+@use "slide-box-vars" as *;
+@use "slide-box-mixins" as *;
+@use "../menu/menu-mixins" as *;
+
+.slide-box {
+  display: flex;
+  position: $sb-position-type;
+  overflow: hidden;
+  padding: $sb-menu-padding;
+  z-index: 100;
+
+  transition-property: all;
+  transition-timing-function: $sb-easing;
+  transition-duration: $sb-duration;
+  transition-delay: $sb-delay;
+
+  &.sb-top {
+    &.sb-menu,
+    &.sb-menu-h {
+      padding-top: $sb-menu-x-padding;
+      @include menu-horizontal($sb-menu-item-gap);
+    }
+
+    &.sb-menu-v {
+      padding-top: $sb-menu-x-padding;
+      @include menu-vertical($sb-menu-item-gap);
+    }
+
+    &.sb-start {
+      @include slide-box("top", 0);
+    }
+    &.sb-mid {
+      @include slide-box("top", 0.5);
+    }
+    &.sb-end {
+      @include slide-box("top", 1);
+    }
+  }
+
+  &.sb-right {
+    &.sb-menu,
+    &.sb-menu-v {
+      padding-right: $sb-menu-x-padding;
+      @include menu-vertical($sb-menu-item-gap);
+    }
+    &.sb-menu-h {
+      padding-bottom: $sb-menu-x-padding;
+      @include menu-horizontal($sb-menu-item-gap);
+    }
+
+    &.sb-start {
+      padding-top: $sb-menu-x-padding;
+      @include slide-box("right", 0);
+    }
+    &.sb-mid {
+      @include slide-box("right", 0.5);
+    }
+    &.sb-end {
+      padding-bottom: $sb-menu-x-padding;
+      @include slide-box("right", 1);
+    }
+  }
+
+  &.sb-bottom {
+    &.sb-menu,
+    &.sb-menu-h {
+      padding-bottom: $sb-menu-x-padding;
+      @include menu-horizontal($sb-menu-item-gap);
+    }
+    &.sb-menu-v {
+      padding-top: $sb-menu-x-padding;
+      @include menu-vertical($sb-menu-item-gap);
+    }
+
+    &.sb-start {
+      @include slide-box("bottom", 0);
+    }
+    &.sb-mid {
+      @include slide-box("bottom", 0.5);
+    }
+    &.sb-end {
+      @include slide-box("bottom", 1);
+    }
+  }
+
+  &.sb-left {
+    &.sb-menu,
+    &.sb-menu-v {
+      padding-left: $sb-menu-x-padding;
+      @include menu-vertical($sb-menu-item-gap);
+    }
+    &.sb-menu-h {
+      padding-bottom: $sb-menu-x-padding;
+      @include menu-horizontal($sb-menu-item-gap);
+    }
+
+    &.sb-start {
+      padding-top: $sb-menu-x-padding;
+      @include slide-box("left", 0);
+    }
+    &.sb-mid {
+      @include slide-box("left", 0.5);
+    }
+    &.sb-end {
+      padding-bottom: $sb-menu-x-padding;
+      @include slide-box("left", 1);
+    }
+  }
+}
+
+.sb-menu,
+.sb-menu-h,
+.sb-menu-v {
+  * {
+    white-space: nowrap;
+    margin: 0;
+  }
+}

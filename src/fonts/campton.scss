@@ -1,0 +1,29 @@
+@font-face {
+  font-display: swap;
+  font-family: "Campton";
+  font-weight: 300;
+  font-style: normal;
+  src:
+    url("Campton/campton-light-webfont.woff2") format("woff2"),
+    url("Campton/campton-light-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Campton";
+  font-weight: 500;
+  font-style: normal;
+  src:
+    url("Campton/campton-book-webfont.woff2") format("woff2"),
+    url("Campton/campton-book-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "Campton";
+  font-weight: 700;
+  font-style: normal;
+  src:
+    url("Campton/campton-bold-webfont.woff2") format("woff2"),
+    url("Campton/campton-bold-webfont.woff") format("woff");
+}

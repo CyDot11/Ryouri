@@ -1,0 +1,29 @@
+"notes": {
+    "devDependencies": {
+        "webpack": "webpack webpack-cli",
+        "loaders": "handlebars-loader file-loader css-loader style-loader postcss-loader sass-loader sass autoprefixer",
+        "babel": "@babel/core babel-loader @babel/preset-env @babel/plugin-proposal-class-properties @babel/cli",
+        "plugins": "mini-css-extract-plugin handlebars copy-webpack-plugin html-webpack-plugin",
+        "server": "webpack-dev-server express",
+        "video": "video.js"
+    },
+
+    "dependencies": {
+        "libs": "jquery current-device hammerjs",
+        "video-plugins": "videojs-contrib-quality-levels videojs-http-source-selector"
+    },
+
+    "tutorial": "https://github.com/vp-online-courses/webpack-tutorial",
+
+    "terminal commands": {
+        "version": "[package] -v",
+        "install npm": "npm init -y",
+        "install dev": "npm install [packages] --save-dev (-D)",
+        "install": "npm install [packages] --save",
+        "uninstall": "npm uninstall [packages]",
+        "clear terminal window": "clear",
+
+        "checkt JS & SCSS-Fehler": "npm run lint",
+        "macht alles automatisch schön": "npm run format",
+    }
+}

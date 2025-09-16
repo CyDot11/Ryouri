@@ -1,0 +1,54 @@
+@use "sass:color";
+@use "../../../styles/color/color-vars" as *;
+@use "../../../styles/basic/basic-mixins" as *;
+
+$cb-fond-color: $button-fond-color;
+$cb-figure-color: $button-figure-color;
+
+$cb-fond-hover-color: $button-fond-hover-color;
+$cb-figure-hover-color: $button-figure-hover-color;
+
+$cb-figure-selected-color: $button-figure-selected-color;
+$cb-figure-active-color: $button-figure-active-color;
+
+$cb-transition-duration: 0.27s;
+
+.custom-button {
+  @include user-protect();
+  background-color: $cb-fond-color;
+  color: $cb-figure-color;
+  transition-property: color, background-color;
+  transition-duration: $cb-transition-duration;
+  .isvg .icon-figure {
+    fill: $cb-figure-color;
+    transition: fill $cb-transition-duration;
+  }
+
+  &.selected {
+    color: $cb-figure-selected-color;
+    .isvg .icon-figure {
+      fill: $cb-figure-selected-color;
+    }
+  }
+
+  &:hover:not(.selected, .disabled),
+  &.vhover:not(.selected, .disabled) {
+    cursor: pointer;
+    background-color: $cb-fond-hover-color;
+    color: $cb-figure-hover-color;
+    .isvg .icon-figure {
+      fill: $cb-figure-hover-color;
+    }
+  }
+
+  &:active:not(.selected, .disabled) {
+    color: $cb-figure-active-color;
+    .isvg .icon-figure {
+      fill: $cb-figure-active-color;
+    }
+  }
+
+  &.disabled:not(.selected) {
+    opacity: 0.6;
+  }
+}

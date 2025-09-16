@@ -1,0 +1,101 @@
+@use "typo-vars" as *;
+@use "typo-mixins" as *;
+@use "../color/color-vars" as *;
+@use "../basic/basic-mixins" as *;
+
+html {
+  font-size: 16px;
+  @include text-style();
+}
+
+p {
+  @include selectable();
+}
+
+p,
+.p {
+  @include text-style();
+  margin-top: 0;
+  color: $text-a-color;
+
+  &.center {
+    text-align: center;
+  }
+}
+
+.h,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+  @include headline-style();
+  color: $headline-a-color;
+
+  &.left {
+    text-align: left;
+  }
+}
+
+.display,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5 {
+  @include display-style();
+  color: $headline-a-color;
+
+  &.left {
+    text-align: left;
+  }
+}
+
+@include font-sizes();
+
+.serif {
+  font-family: "Source Serif 4", serif;
+  letter-spacing: $headline-serif-letter-spacing;
+}
+
+p,
+.p {
+  &.serif {
+    font-weight: $text-weight + 100;
+    letter-spacing: normal;
+  }
+}
+
+.subheadline,
+.subtitle {
+  text-align: center;
+  font-weight: 500;
+  margin-top: -0.5em;
+  @include font-spacer();
+}
+
+a,
+.a {
+  @include link-style();
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover,
+  &.vhover {
+    color: $link-hover-color;
+  }
+
+  &.active,
+  &.vactive {
+    color: $link-active-color;
+  }
+}
+
+.font-spacer {
+  @include font-spacer();
+}

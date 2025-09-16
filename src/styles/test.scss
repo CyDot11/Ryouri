@@ -1,0 +1,117 @@
+@use "sass:color";
+@use "./color/color-vars" as *;
+@use "../components/slide-box/slide-box-mixins" as *;
+@use "../components/menu/menu-mixins" as *;
+@use "../components/button/indicators/indicators-vars" as *;
+@use "./breakpoints/breakpoint-mixins" as *;
+@use "./breakpoints/breakpoint-vars" as *;
+
+section {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative;
+
+  &:nth-of-type(odd) {
+    background-color: hsl(0, 0%, 82%);
+  }
+}
+
+.resp-test-case {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid violet;
+
+  .part {
+    width: 2rem;
+    height: 1rem;
+    background-color: lightgrey;
+    border: 1px solid grey;
+  }
+}
+
+$temp1: (
+  "height": 3rem,
+  "padding-top": 0,
+  ".part": (
+    "width": 3rem,
+  )
+);
+
+.resp-test-case {
+  @include responsify($temp1, "lg", "steep", "rem");
+}
+
+.main-content {
+  background-color: color.change(#eae7d4, $alpha: 0.5);
+}
+
+#Main-Navi-Bar {
+  height: 3rem;
+  position: fixed;
+  top: 3.5rem;
+  z-index: 50;
+  background-color: transparent;
+  overflow: visible;
+
+  .main-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    background-color: transparent;
+    overflow: visible;
+  }
+}
+
+#Main-Navigation {
+  //min-height: 60%;
+  //min-width: 80%;
+  div.p {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    //border: 1px solid silver;
+  }
+  background-color: hsl(0, 0%, 90%);
+}
+
+//#RI-Close-Button {}
+
+#Indicators-1 {
+  background-color: $color-a-bright;
+  padding: 2rem 0;
+  .indicators {
+    //border: 1px solid silver;
+  }
+  //@include responsive-indicator-sizes--bp("bullets");
+}
+
+#Display-Section {
+  .main-content {
+    background-color: #333;
+  }
+}
+
+#Parallax-Section {
+  z-index: -100;
+  .main-content {
+    height: 20vw;
+  }
+}
+
+#Icon-Text-Unit-Section {
+  .icon-img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+.grid {
+  width: 100%;
+  border: 1px solid red;
+
+  .cell {
+    aspect-ratio: 1/1;
+    padding: 0.5rem;
+    color: $color-a-bright;
+    background-color: $color-a-dark;
+  }
+}

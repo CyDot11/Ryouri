@@ -1,0 +1,15 @@
+@mixin menu-horizontal($gap: 1.4em) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  column-gap: $gap;
+}
+
+@mixin menu-vertical($gap: 1.4em) {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  row-gap: $gap;
+}

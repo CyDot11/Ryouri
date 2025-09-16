@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "columns-vars" as *;
+@use "../breakpoints/breakpoint-vars" as *;
+
+@mixin classifyResponsiveColumns($maxColumns: $max-column-count, $clip: false) {
+  @each $bp-id in $breakpoint-keys {
+    @if $bp-id != "x0" {
+      @include classifyColumnsOfBreakpoint($bp-id, $maxColumns, $clip);
+    }
+  }
+}
+
+@mixin classifyColumnsOfBreakpoint(
+  $bp-id,
+  $maxColumns: $max-column-count,
+  $clip: false
+) {
+  @for $i from 1 through $maxColumns {
+    @include classifyColumnOfBreakpoint($bp-id, $i, $clip);
+  }
+}
+
+@mixin classifyColumnOfBreakpoint($bp-id: "sm", $count: 2, $clip: false) {
+  $selector: "." + $bp-id + "-cols-" + $count;
+  $bp: map.get($breakpoints-min, $bp-id);
+  $max-width: 100000px;
+
+  @if $clip == true {
+    $max-width: map.get($breakpoints-max, $bp-id);
+  }
+
+  @media (min-width: $bp) and (max-width: $max-width) {
+    &#{$selector} {
+      column-count: $count;
+      column-width: auto;
+    }
+  }
+}

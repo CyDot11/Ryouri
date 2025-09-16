@@ -1,0 +1,42 @@
+@use "slide-box-vars" as *;
+
+@mixin slide-box(
+  $position: $slidebox-placing,
+  $factor: $slidebox-align-factor
+) {
+  $align-pc: calc(100% * $factor);
+
+  @if $position == "top" {
+    top: 0%;
+    left: $align-pc;
+    transform: translate(-$align-pc, 0%);
+
+    &.sb-hidden {
+      transform: translate(-$align-pc, -100%);
+    }
+  } @else if $position == "bottom" {
+    top: 100%;
+    left: $align-pc;
+    transform: translate(-$align-pc, -100%);
+
+    &.sb-hidden {
+      transform: translate(-$align-pc, 0%);
+    }
+  } @else if $position == "left" {
+    top: $align-pc;
+    left: 0%;
+    transform: translate(0%, -$align-pc);
+
+    &.sb-hidden {
+      transform: translate(-100%, -$align-pc);
+    }
+  } @else if $position == "right" {
+    top: $align-pc;
+    left: 100%;
+    transform: translate(-100%, -$align-pc);
+
+    &.sb-hidden {
+      transform: translate(0%, -$align-pc);
+    }
+  }
+}

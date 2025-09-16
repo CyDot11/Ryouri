@@ -1,0 +1,63 @@
+@use "indicators-vars" as *;
+@use "../../../styles/color/color-vars" as *;
+
+.indicators {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  .indicator {
+    background-color: $color-a-dark;
+
+    &.selected {
+      background-color: $link-selected-color;
+    }
+
+    &:hover:not(.selected, .disabled),
+    &.vhover:not(.selected, .disabled) {
+      cursor: pointer;
+      background-color: $link-hover-color;
+    }
+
+    &:active:not(.selected, .disabled) {
+      background-color: $link-active-color;
+    }
+
+    &.disabled:not(.selected),
+    &.not-ready {
+      opacity: 0.6;
+    }
+  }
+
+  &.bullets .indicator {
+    //aspect-ratio: 1;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  &.pipes {
+    align-items: flex-end;
+    gap: $pipes-indicator-gap;
+    height: $pipes-indicator-max-height;
+    padding: 0;
+
+    .indicator {
+      width: $pipes-indicator-width;
+      height: $pipes-indicator-min-height;
+      border-radius: 0;
+      transition: height 33ms;
+
+      &.selected {
+        height: $pipes-indicator-max-height;
+      }
+    }
+  }
+  @include responsive-indicator-sizes--bp("bullets");
+  @include responsive-indicator-sizes--bp("pipes");
+}

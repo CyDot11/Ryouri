@@ -1,0 +1,123 @@
+@use "sass:map";
+@use "../breakpoints/breakpoint-vars" as *;
+@use "../breakpoints/responsive-functions" as *;
+
+$responsive-text: true;
+$responsive-headline: true;
+$responsive-display: true;
+
+$use-device-query: false;
+$device-super-prefix: "html.media-label-";
+
+$text-sizes: (
+  "p": 16px,
+  "p-small": 14px,
+  "p-tiny": 12px,
+);
+
+$responsive-text-curve: "flat";
+
+$text-family: Raleway, sans-serif !default;
+$text-weight: 400 !default;
+$text-letter-spacing: 0.04em !default;
+$text-word-spacing: -0.05em !default;
+$text-line-height: 1.6 !default;
+$text-transform: none;
+$text-align: left;
+$text-space-line-factor: 1;
+
+// HEADLINE STYLE ------------------------------------
+
+$headline-sizes: (
+  "h1": 42px,
+  "h2": 32px,
+  "h3": 24px,
+  "h4": 18px,
+  "h5": 16px,
+);
+
+$responsive-headline-curve: "steep";
+
+$headline-family: Campton, sans-serif !default;
+$headline-weight: 700 !default;
+$headline-letter-spacing: 0.01em !default;
+$headline-serif-letter-spacing: normal !default;
+$headline-word-spacing: -0.1em !default;
+$headline-serif-word-spacing: normal;
+$headline-line-height: 1.2;
+$headline-transform: none !default;
+$headline-align: center !default;
+$headline-space-line-factor: 0.5;
+
+// DISPLAY STYLE ------------------------------------
+
+$display-size-factor: 1.1;
+$display-sizes: (
+  "display-1": multiplyPxPerfect(
+      map.get($headline-sizes, "h1"),
+      $display-size-factor
+    ),
+  "display-2": multiplyPxPerfect(
+      map.get($headline-sizes, "h2"),
+      $display-size-factor
+    ),
+  "display-3": multiplyPxPerfect(
+      map.get($headline-sizes, "h3"),
+      $display-size-factor
+    ),
+  "display-4": multiplyPxPerfect(
+      map.get($headline-sizes, "h4"),
+      $display-size-factor
+    ),
+  "display-5": multiplyPxPerfect(
+      map.get($headline-sizes, "h5"),
+      $display-size-factor
+    ),
+);
+
+$display-family: Campton, sans-serif !default;
+$display-weight: 100 !default;
+$display-letter-spacing: -0.02em !default;
+$display-word-spacing: -0.01em !default;
+$display-line-height: 1.3 !default;
+$display-transform: uppercase !default;
+$display-align: center !default;
+$display-space-line-factor: 0.5;
+
+// BREAKPOINTS ----------------------------------------
+
+$responsive-text-factors: map.get($breakpoint-factors, $responsive-text-curve);
+$responsive-text-factors--device: map.get(
+  $device-factors,
+  $responsive-text-curve
+);
+
+$responsive-headline-factors: map.get(
+  $breakpoint-factors,
+  $responsive-headline-curve
+);
+$responsive-headline-factors--device: map.get(
+  $device-factors,
+  $responsive-headline-curve
+);
+
+$responsive-display-factors: $responsive-headline-factors;
+$responsive-display-factors--device: $responsive-headline-factors--device;
+
+$font-selectors: (
+  "p": "p, .p",
+  "p-small": "p.small, .p-small",
+  "p-tiny": "p.tiny, .p-tiny",
+
+  "h1": "h1, .h1",
+  "h2": "h2, .h2",
+  "h3": "h3, .h3",
+  "h4": "h4, .h4",
+  "h5": "h5, .h5",
+
+  "display-1": "h1.display, .display-1",
+  "display-2": "h2.display, .display-2",
+  "display-3": "h3.display, .display-3",
+  "display-4": "h4.display, .display-4",
+  "display-5": "h5.display, .display-5",
+);

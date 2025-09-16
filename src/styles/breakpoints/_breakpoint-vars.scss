@@ -1,0 +1,111 @@
+/*
+breakpoint-vars.scss
+Designer: © Michael Schwarz, CyDot, info@cydot.de
+Version:  2.0.0
+Updated: 2022-06-28
+*/
+
+// BROWSER WIDTH BREAKPOINTS ----------------------------
+
+$breakpoint-keys: ("x0", "xs", "sm", "md", "lg", "xl");
+
+$x0: 0;
+$xs: 320px;
+$sm: 450px;
+$md: 760px;
+$lg: 1400px;
+$xl: 2500px;
+
+$breakpoints-min: (
+  "x0": $x0,
+  "xs": $xs,
+  "sm": $sm,
+  "md": $md,
+  "lg": $lg,
+  "xl": $xl,
+);
+
+$breakpoints-max: (
+  "x0": $xs - 0.1,
+  "xs": $sm - 0.1,
+  "sm": $md - 0.1,
+  "md": $lg - 0.1,
+  "lg": $xl - 0.1,
+  "xl": 1000000px,
+);
+
+// BREAKPOINT FACTORS steep, medium, flat ----------------------------------
+
+$breakpoint-factors--steep: (
+  "x0": 0.8,
+  "xs": 0.88,
+  "sm": 1,
+  "md": 1.15,
+  "lg": 1.4,
+  "xl": 1.8,
+);
+
+$breakpoint-factors--medium: (
+  "x0": 0.85,
+  "xs": 0.9,
+  "sm": 1,
+  "md": 1,
+  "lg": 1.2,
+  "xl": 1.5,
+);
+
+$breakpoint-factors--flat: (
+  "x0": 0.9,
+  "xs": 0.95,
+  "sm": 1,
+  "md": 1,
+  "lg": 1.1,
+  "xl": 1.2,
+);
+
+$breakpoint-factors: (
+  "steep": $breakpoint-factors--steep,
+  "medium": $breakpoint-factors--medium,
+  "flat": $breakpoint-factors--flat,
+);
+
+// DEVICE BREAKPOINTS ------------------------------------
+
+$ph: 0 !default;
+$ta: $md !default;
+$de: $lg !default;
+$dx: $xl !default;
+
+$device-breakpoints: (
+  "ph": $ph,
+  "ta": $ta,
+  "de": $de,
+  "dx": $dx,
+);
+
+$device-factors--flat: (
+  "ph": 0.95,
+  "ta": 1,
+  "de": 1,
+  "dx": 1.1,
+);
+
+$device-factors--medium: (
+  "ph": 0.9,
+  "ta": 1,
+  "de": 1.1,
+  "dx": 1.3,
+);
+
+$device-factors--steep: (
+  "ph": 0.8,
+  "ta": 1,
+  "de": 1.25,
+  "dx": 1.6,
+);
+
+$device-factors: (
+  "steep": $device-factors--steep,
+  "medium": $device-factors--medium,
+  "flat": $device-factors--flat,
+);

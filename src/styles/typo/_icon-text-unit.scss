@@ -1,0 +1,49 @@
+@use "../grid/flex-mixins" as *;
+
+.icon-text-unit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+  //border: 1px solid grey;
+
+  .icon-img {
+    margin-right: 1rem;
+  }
+  .icon-text {
+    margin: 0;
+  }
+
+  &.itu-left {
+    justify-content: flex-start;
+    .icon-text {
+      text-align: left;
+    }
+  }
+
+  &.itu-center {
+    justify-content: center;
+  }
+
+  &.itu-top {
+    align-items: flex-start;
+  }
+
+  &.itu-mid {
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  &.itu-bottom {
+    align-items: flex-end;
+  }
+
+  &.itu-sub {
+    flex-direction: column;
+    .icon-img {
+      margin-right: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

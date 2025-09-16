@@ -1,0 +1,10 @@
+@use "grid-mixins" as *;
+@use "flex-mixins" as *;
+
+@supports (display: grid) {
+  @include classify-grid();
+}
+
+@supports (display: flex) and (not (display: grid)) {
+  @include classify-flex-grid();
+}

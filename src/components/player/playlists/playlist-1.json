@@ -1,0 +1,14 @@
+{
+  "commonPath": "images/player/set-1/",
+  "labelDefinition": "none",
+  "items": [
+    {
+      "url": "img-1.jpg",
+      "data": { "css": { "backgroundSize": "cover", "backgrounColor": "blue" } }
+    },
+    { "url": "img-2.jpg" },
+    "img-3.jpg",
+    "img-4.png",
+    "img-5.jpg"
+  ]
+}

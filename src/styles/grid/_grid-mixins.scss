@@ -1,0 +1,29 @@
+@use "grid-vars" as *;
+@use "../breakpoints/breakpoint-vars" as *;
+
+@mixin make-grid($columns: $grid-cols, $gap: $grid-gap) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-auto-rows: auto;
+  grid-gap: $gap;
+}
+
+@mixin classify-grid() {
+  .grid {
+    @include make-grid();
+
+    @each $bp-id, $bp-value in $breakpoints-min {
+      @media (min-width: $bp-value) {
+        @for $i from 2 through $grid-max-cols {
+          $selector: "." + $bp-id + "-cols-" + $i;
+          &#{$selector} {
+            grid-template-columns: repeat($i, 1fr);
+            > * {
+              min-width: calc(100% / $i);
+            }
+          }
+        }
+      }
+    }
+  }
+}

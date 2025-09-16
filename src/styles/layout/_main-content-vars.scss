@@ -1,0 +1,20 @@
+$main-content-width-x0: 98% !default;
+$main-content-width-xs: 94% !default;
+$main-content-width-sm: 86% !default;
+$main-content-width-md: 78% !default;
+$main-content-width-lg: 72% !default;
+$main-content-width-xl: 60% !default;
+
+$main-content-width: (
+  "x0": $main-content-width-x0,
+  "xs": $main-content-width-xs,
+  "sm": $main-content-width-sm,
+  "md": $main-content-width-md,
+  "lg": $main-content-width-lg,
+  "xl": $main-content-width-xl,
+);
+
+$main-content-padding-top: 48;
+$main-content-padding-bottom: 72;
+
+$main-content-factor-curve: "medium" !default;

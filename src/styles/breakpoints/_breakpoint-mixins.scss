@@ -1,0 +1,80 @@
+@use "sass:map";
+@use "sass:meta";
+@use "responsive-functions" as rf;
+@use "breakpoint-vars" as *;
+
+@function bp($key) {
+  @if map.has-key($breakpoints-min, $key) {
+    @return map.get($breakpoints-min, $key);
+  }
+  @error "Unknown breakpoint `#{$key}`. Available: #{map.keys($breakpoints-min)}";
+}
+
+@mixin up($key) {
+  @media (min-width: bp($key)) { @content; }
+}
+
+@mixin down($key) {
+  @media (max-width: bp($key)) { @content; }
+}
+
+@mixin between($from, $to) {
+  @media (min-width: bp($from)) and (max-width: bp($to)) { @content; }
+}
+
+// Optional Zusatz-Prims, falls du sie nutzt:
+@mixin landscape   { @media (orientation: landscape) { @content; } }
+@mixin portrait    { @media (orientation: portrait)  { @content; } }
+@mixin retina      { @media (min-resolution: 2dppx)  { @content; } }
+// oder: @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)
+
+@mixin responsify($prop-value-map, $bp, $curve, $unit: null) {
+  
+  @media (min-width: bp($bp)) {
+    @each $key, $value in $prop-value-map {
+      @if meta.type-of($value) == 'map' {
+        // Verschachtelte Map (z.B. für Selektoren wie .part)
+        #{$key} {
+          @include responsify($value, $bp, $curve, $unit);
+        }
+      } @else {
+        @if $unit == 'rem' {
+          #{$key}: rf.responsive-value--rem($value, $bp, $curve);
+        } @else if $unit == 'em' {
+          #{$key}: rf.responsive-value--em($value, $bp, $curve);
+        } @else if $unit == 'px' {
+          #{$key}: rf.responsive-value--px($value, $bp, $curve);
+        } @else if $unit == null or $unit == undefined {
+          #{$key}: rf.responsive-value($value, $bp, $curve);
+        }
+      }
+    }
+  }
+}
+
+@mixin responsify-multi($prop-value-map, $bp-list, $curve, $unit: rem) {
+  
+  @if $bp-list == "all" {
+    $bp-list: $breakpoint-keys;
+  }
+  @else if type-of($bp-list) != "list" {
+    $bp-list: null;
+    @error "$bp-list must be a list of breakpoint keys, e.g. (sm, md, lg)";
+  }
+  @if $bp-list {
+    @each $bp in $bp-list {
+      @if not map.has-key($breakpoints-min, $bp) {
+        @error "Unknown breakpoint `#{$bp}`. Available: #{map.keys($breakpoints-min)}";
+      }
+      @else {
+        @include responsify($prop-value-map, $bp, $curve, $unit);
+      }
+    }
+  }
+}
+
+// Optionale Glättung der Steps (nur Transition)
+@mixin responsive-transition($props: all, $dur: 220ms, $ease: cubic-bezier(.2,.7,.2,1)) {
+  transition: #{$props} #{$dur} #{$ease};
+  @media (prefers-reduced-motion: reduce) { transition: none !important; }
+}

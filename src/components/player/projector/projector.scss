@@ -1,0 +1,142 @@
+/*
+Projector styles
+2021 Michael Schwarz - cydot.de / grafic, web, media
+Last update 2022.11.05
+*/
+
+// variables
+$projector-width: 100% !default;
+$projector-bg-color: transparent !default;
+
+$item-bg-size: contain !default;
+$item-bg-padding: 0 !default;
+$item-bg-position: center !default;
+$item-bg-repeat: no-repeat !default;
+
+$projector-slide-duration: 0.66s !default;
+$projector-slide-easing: ease-in-out !default;
+$projector-slide-transition: transform $projector-slide-duration
+  $projector-slide-easing;
+
+$projector-fade-duration: 0.45s !default;
+$projector-fade-easing: linear !default;
+$projector-fade-transition: opacity $projector-fade-duration
+  $projector-fade-easing;
+
+$muted-area-width: 33%;
+
+.projector {
+  position: relative;
+  box-sizing: border-box;
+  width: $projector-width;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  background-color: $projector-bg-color;
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+
+  .muted-area {
+    width: $muted-area-width;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, 0);
+    z-index: 100;
+    background-color: violet;
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .indicators {
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    transform: translate(-50%, 0);
+    z-index: 110;
+  }
+
+  .projector-stack {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .projector-item {
+    box-sizing: border-box;
+    position: relative;
+    display: none;
+    float: left;
+    width: 100%;
+    height: 100%;
+    margin-right: -100%;
+    padding: $item-bg-padding;
+    transition: $projector-slide-transition;
+    backface-visibility: hidden;
+    background-size: $item-bg-size;
+    background-position: $item-bg-position;
+    background-repeat: $item-bg-repeat;
+
+    .projector-item-inner {
+      width: 100%;
+    }
+  }
+
+  .projector-item.active,
+  .projector-item-next,
+  .projector-item-prev {
+    display: block;
+  }
+
+  &.slide {
+    &:not(.vertical) {
+      .projector-item-next:not(.projector-item-left),
+      .active.projector-item-right {
+        transform: translateX(100%);
+      }
+
+      .projector-item-prev:not(.projector-item-right),
+      .active.projector-item-left {
+        transform: translateX(-100%);
+      }
+    }
+
+    &.vertical {
+      .projector-item-next:not(.projector-item-left),
+      .active.projector-item-right {
+        transform: translateY(100%);
+      }
+
+      .projector-item-prev:not(.projector-item-right),
+      .active.projector-item-left {
+        transform: translateY(-100%);
+      }
+    }
+  }
+
+  &.fade {
+    .projector-item {
+      opacity: 0;
+      transition-property: opacity;
+      transform: none;
+    }
+
+    .projector-item.active,
+    .projector-item-next.projector-item-left,
+    .projector-item-prev.projector-item-right {
+      z-index: 10;
+      opacity: 1;
+    }
+
+    .active.projector-item-left,
+    .active.projector-item-right {
+      z-index: 0;
+      opacity: 0;
+      transition: $projector-fade-transition;
+    }
+  }
+}

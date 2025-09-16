@@ -1,0 +1,39 @@
+@use "sass:map";
+@use "sass:math";
+@use "main-content-vars" as *;
+@use "../breakpoints/breakpoint-vars" as *;
+@use "../breakpoints/responsive-functions" as *;
+
+// Main content padding in px (to be converted to rem)
+@function get-content-padding-top($breakpoint) {
+  @return responsive-value--rem($main-content-padding-top, $breakpoint, $main-content-factor-curve);
+}
+
+@function get-content-padding-bottom($breakpoint) {
+  @return responsive-value--rem($main-content-padding-bottom, $breakpoint, $main-content-factor-curve);
+}
+
+@each $key in $breakpoint-keys {
+  @media (min-width: map.get($breakpoints-min, $key)) and (max-width: map.get($breakpoints-max, $key)) {
+    .main-content {
+      width: map.get($main-content-width, $key);
+      padding-top: get-content-padding-top($key);
+      padding-bottom: get-content-padding-bottom($key);
+    }
+  }
+}
+
+section[role="main"] div[role="main"],
+.main-content {
+  box-sizing: border-box;
+  padding-left: 0;
+  padding-right: 0;
+  overflow: hidden;
+
+  position: relative;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  transition: all 0.22s ease-out;
+}

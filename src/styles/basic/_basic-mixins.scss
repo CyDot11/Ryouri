@@ -1,0 +1,32 @@
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
+
+@mixin user-protect($no-select: true, $no-drag: true) {
+  @if $no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+  }
+  @if $no-drag {
+    user-drag: none;
+    -webkit-user-drag: none;
+  }
+}
+
+@mixin selectable() {
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+}
+
+@mixin shadow($alpha: 0.25, $blur: 8px, $spread: 2px) {
+  $color: rgba(0, 0, 0, $alpha);
+  box-shadow: 2px 3px $blur $spread $color;
+  -webkit-box-shadow: 2px 3px $blur $spread $color;
+  -moz-box-shadow: 2px 3px $blur $spread $color;
+}

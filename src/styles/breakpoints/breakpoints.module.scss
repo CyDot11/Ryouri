@@ -1,0 +1,7 @@
+@use "breakpoint-vars" as *;
+
+:export {
+  @each $key, $value in $breakpoints-min {
+    #{$key}: $value;
+  }
+}

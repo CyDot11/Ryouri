@@ -1,0 +1,35 @@
+@use "../../styles/color/color-vars" as *;
+@use "../../styles/basic/basic-mixins" as *;
+
+$isvg-fond-color: $color-a-bright;
+$isvg-figure-color: $color-a-dark;
+
+$isvg-figure-size-factor: 0.7;
+$isvg-size: 3rem;
+
+$isvg-transition-duration: 0.27s;
+
+.isvg-icon-box {
+  @include user-protect();
+  width: $isvg-size;
+  height: $isvg-size;
+  background-color: $isvg-fond-color;
+
+  .isvg {
+    width: 100% * $isvg-figure-size-factor;
+    height: 100% * $isvg-figure-size-factor;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .icon-fond,
+    .fond {
+      fill: transparent;
+    }
+    .icon-figure,
+    .figure {
+      fill: $isvg-figure-color;
+    }
+  }
+}
