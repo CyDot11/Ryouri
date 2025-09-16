@@ -25,5 +25,6 @@
 
         "checkt JS & SCSS-Fehler": "npm run lint",
         "macht alles automatisch schön": "npm run format",
+        "rekursiv entfernen (--cached = nur aus Git)": "git rm -r --cached node_modules"
     }
 }
